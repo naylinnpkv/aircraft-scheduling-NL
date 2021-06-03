@@ -1,0 +1,13 @@
+.flight {
+  border: 3px solid black;
+  padding: 20px;
+  margin: 10px;
+
+  min-width: fit-content;
+  list-style: none;
+}
+.flight_information {
+  display: flex;
+  justify-content: space-between;
+}
+

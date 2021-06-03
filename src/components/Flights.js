@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "./styles/Flights.style.css";
 export const Flights = () => {
   const [flights, setFlights] = useState([]);
 
@@ -15,14 +15,16 @@ export const Flights = () => {
       I am flights
       <ul>
         {flights.map((flight, index) => (
-          <li>
+          <li className="flight">
             <div>Flight: {flight.id}</div>
-            <div>
-              {`${flight.origin} `}
-              {flight.readable_departure}
-            </div>
-            <div>
-              {flight.destination} {flight.readable_arrival}
+            <div className="flight_information">
+              <div className="location_time">
+                {`${flight.origin} `}<br/>
+                {flight.readable_departure}
+              </div>
+              <div>
+                {flight.destination} <br/>{flight.readable_arrival}
+              </div>
             </div>
           </li>
         ))}
