@@ -5,10 +5,10 @@ import "./styles/Rotations.style.css";
 export const Rotations = ({ rotations, deleteRotation }) => {
   return (
     <div className="Rotation-container">
-      I am Rotations
+      Rotations
       <ul>
         {rotations.map((rotation, index) => (
-          <li>
+          <li key={index}>
             <div> {rotation.id}</div>
             <div>
               <div>

@@ -18,7 +18,7 @@ export const Aircrafts = () => {
       <div className="container">
         <ul>
           {aircrafts.map((aircraft, index) => (
-            <li className="aircraft" id="index">
+            <li className="aircraft" key={index}>
               {aircraft.ident}
             </li>
           ))}

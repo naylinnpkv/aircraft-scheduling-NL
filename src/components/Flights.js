@@ -21,12 +21,10 @@ export const Flights = () => {
 
   //will add the flight to rotation if user want
   const addRotation = (flightToAdd) => {
-    if (flights.length > 0) {
-      if (routeChecker(flights, flightToAdd) === false) {
-        console.log(routeChecker(flights, flightToAdd));
-        alert("route conflicts");
-        return;
-      }
+    if (routeChecker(rotations, flightToAdd) === false) {
+      console.log(routeChecker(flights, flightToAdd));
+      alert("route conflicts");
+      return;
     }
 
     flights.filter((flight, index) => {
@@ -34,7 +32,7 @@ export const Flights = () => {
         setRotations([...rotations, flight]);
       }
     });
-    console.log(rotations.length);
+
     return;
   };
 
@@ -47,8 +45,12 @@ export const Flights = () => {
 
   //_______________Util Functions_______________//
   const routeChecker = (arr, obj) => {
+    if (arr.length === 0) {
+      console.log("HI");
+      return;
+    }
     let lastIndex = arr.length - 1;
-    console.log(arr[lastIndex].destination, obj.origin);
+    console.log(arr[lastIndex], obj, arr.length);
     return arr[lastIndex].destination !== obj.origin ? false : true;
   };
 
@@ -58,7 +60,7 @@ export const Flights = () => {
       I am flights
       <ul className="flight-card">
         {flights.map((flight, index) => (
-          <li className="flight">
+          <li className="flight" key={index}>
             <div> {flight.id}</div>
             <div className="flight_information">
               <div className="location_time">
