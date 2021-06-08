@@ -11,6 +11,7 @@ What I would improve if I have more time
 
 - Styling (improve basic styling and responsiveness)
 - Edge cases such as schedule collision
+- Drag and Drop feature for rotation scheduling
 
 
 Additional Notes:

@@ -22,8 +22,25 @@ export const Flights = () => {
   //will add the flight to rotation if user want
   const addRotation = (flightToAdd) => {
     if (routeChecker(rotations, flightToAdd) === false) {
-      console.log(routeChecker(flights, flightToAdd));
       alert("route conflicts");
+      return;
+    }
+    // console.log(
+    //   "arrival",
+    //   rotations[rotations.length - 1].arrivaltime,
+    //   flightToAdd.departuretime
+    // );
+    if (
+      rotations.length > 0 &&
+      restTimeAndScheduleCollisionChecker(
+        rotations[rotations.length - 1].arrivaltime,
+        flightToAdd.departuretime,
+        rotations
+      ) === false
+    ) {
+      alert(
+        "Scheduling Collision and aircraft turnaround time needs atleast 20 mins"
+      );
       return;
     }
 
@@ -46,14 +63,27 @@ export const Flights = () => {
   //_______________Util Functions_______________//
   const routeChecker = (arr, obj) => {
     if (arr.length === 0) {
-      console.log("HI");
       return;
     }
     let lastIndex = arr.length - 1;
     console.log(arr[lastIndex], obj, arr.length);
     return arr[lastIndex].destination !== obj.origin ? false : true;
   };
+  const restTimeAndScheduleCollisionChecker = (
+    oldArrival,
+    newDeparture,
+    rotations
+  ) => {
+    if (rotations.length === 0) {
+      console.log("it's empty");
+      return true;
+    }
+    if (newDeparture - oldArrival < 20) {
+      return false;
+    }
 
+    return true;
+  };
   //__________________Util Functions_____________//
   return (
     <div className="flight-container">
