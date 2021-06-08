@@ -1,0 +1,19 @@
+What I focused
+
+- High-Level Requirements
+- Basic Functionalities
+- Edge Cases and bugs
+- Component Structure
+- State Data Structure
+
+
+What I would improve if I have more time
+
+- Styling (improve basic styling and responsiveness)
+- Edge cases such as schedule collision
+
+
+Additional Notes:
+
+- The instruction was alittle confusing to me and I have implemented feature so that they can add schedule under the conditions provided
+- It was definitely a fun Project and Thank you.

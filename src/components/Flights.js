@@ -20,9 +20,17 @@ export const Flights = () => {
   //_______________________Callbacks and Handlers___________________//
 
   //will add the flight to rotation if user want
-  const addRotation = (id) => {
+  const addRotation = (flightToAdd) => {
+    if (flights.length > 0) {
+      if (routeChecker(flights, flightToAdd) === false) {
+        console.log(routeChecker(flights, flightToAdd));
+        alert("route conflicts");
+        return;
+      }
+    }
+
     flights.filter((flight, index) => {
-      if (flight.id === id) {
+      if (flight.id === flightToAdd.id) {
         setRotations([...rotations, flight]);
       }
     });
@@ -36,6 +44,15 @@ export const Flights = () => {
     setRotations(newRotation.filter((rotation) => rotation.id !== id));
   };
   //____________________Callbacks and Handlers_________________________//
+
+  //_______________Util Functions_______________//
+  const routeChecker = (arr, obj) => {
+    let lastIndex = arr.length - 1;
+    console.log(arr[lastIndex].destination, obj.origin);
+    return arr[lastIndex].destination !== obj.origin ? false : true;
+  };
+
+  //__________________Util Functions_____________//
   return (
     <div className="flight-container">
       I am flights
@@ -50,7 +67,7 @@ export const Flights = () => {
                 {flight.destination}
                 {flight.readable_arrival}
               </div>
-              <button onClick={() => addRotation(flight.id)}>ADD</button>
+              <button onClick={() => addRotation(flight)}>ADD</button>
             </div>
           </li>
         ))}
