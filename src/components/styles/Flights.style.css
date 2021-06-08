@@ -2,12 +2,35 @@
   border: 3px solid black;
   padding: 20px;
   margin: 10px;
-
   min-width: fit-content;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+button:hover {
+  background-color: gray;
+}
+li {
   list-style: none;
 }
 .flight_information {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  margin: auto;
 }
 
+.flight-container {
+  position: absolute;
+  right: 0px;
+  width: 20%;
+  top: 10px;
+  border: 2px solid black;
+}
+.flight-card {
+  width: fit-content;
+  padding: 5px;
+}
+.location_time {
+  display: flex;
+}

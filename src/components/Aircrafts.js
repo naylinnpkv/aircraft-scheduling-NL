@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Flights } from "./Flights";
+
 import "./styles/Aircrafts.style.css";
 export const Aircrafts = () => {
   const [aircrafts, setAircrafts] = useState([]);
@@ -8,15 +10,6 @@ export const Aircrafts = () => {
       .then((response) => response.json())
       .then((data) => setAircrafts(data.data));
   }, []);
-  //   data: [
-  //     {
-  //     ident: "GABCD",
-  //     type: "A320",
-  //     economySeats: 186,
-  //     base: "EGKK"
-  //     }
-  //     ]
-  console.log(aircrafts[0]);
 
   return (
     <div className="aircrafts_component">
@@ -29,14 +22,9 @@ export const Aircrafts = () => {
               {aircraft.ident}
             </li>
           ))}
-          <li className="aircraft">Mock Aircrafts</li>
-          <li className="aircraft">Mock Aircrafts</li>
-          <li className="aircraft">Mock Aircrafts</li>
-          <li className="aircraft">Mock Aircrafts</li>{" "}
-          <li className="aircraft">Mock Aircrafts</li>
-          <li className="aircraft">Mock Aircrafts</li>
         </ul>
       </div>
+      <Flights />
     </div>
   );
 };
