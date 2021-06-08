@@ -17,12 +17,25 @@ export const Flights = () => {
       //setting the array with the array with flights
       .then((data) => setFlights(data.data))
   );
+  //_______________________Callbacks and Handlers___________________//
 
+  //will add the flight to rotation if user want
   const addRotation = (id) => {
-    console.log(rotations);
-    setRotations([...rotations, id]);
+    flights.filter((flight, index) => {
+      if (flight.id === id) {
+        setRotations([...rotations, flight]);
+      }
+    });
+    console.log(rotations.length);
+    return;
   };
 
+  //will delete the rotation if user wish to
+  const deleteRotation = (id) => {
+    const newRotation = [...rotations];
+    setRotations(newRotation.filter((rotation) => rotation.id !== id));
+  };
+  //____________________Callbacks and Handlers_________________________//
   return (
     <div className="flight-container">
       I am flights
@@ -42,7 +55,7 @@ export const Flights = () => {
           </li>
         ))}
       </ul>
-      <Rotations id={rotations} />
+      <Rotations rotations={rotations} deleteRotation={deleteRotation} />
     </div>
   );
 };
