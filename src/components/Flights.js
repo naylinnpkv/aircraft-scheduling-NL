@@ -6,30 +6,33 @@ import { Rotations } from "./Rotations";
 import "./styles/Flights.style.css";
 //___________________STYLE__________________//
 
+import { routeChecker, restTimeAndScheduleCollisionChecker } from "../Utils";
+//_______________________________UTILS_______________________________________//
+
 export const Flights = () => {
   const [flights, setFlights] = useState([]);
   const [rotations, setRotations] = useState([]);
 
   //________________________STATE_______________//
+
   useEffect(() =>
     fetch("https://infinite-dawn-93085.herokuapp.com/flights")
       .then((response) => response.json())
       //setting the array with the array with flights
       .then((data) => setFlights(data.data))
   );
+
   //_______________________Callbacks and Handlers___________________//
 
   //will add the flight to rotation if user want
   const addRotation = (flightToAdd) => {
+    //checking if the aircraft is moving without flight or not
     if (routeChecker(rotations, flightToAdd) === false) {
       alert("route conflicts");
       return;
     }
-    // console.log(
-    //   "arrival",
-    //   rotations[rotations.length - 1].arrivaltime,
-    //   flightToAdd.departuretime
-    // );
+
+    //checking if the flight turnaround is atleast 20 mins && if the schedules are overlapped in one day or not
     if (
       rotations.length > 0 &&
       restTimeAndScheduleCollisionChecker(
@@ -60,31 +63,6 @@ export const Flights = () => {
   };
   //____________________Callbacks and Handlers_________________________//
 
-  //_______________Util Functions_______________//
-  const routeChecker = (arr, obj) => {
-    if (arr.length === 0) {
-      return;
-    }
-    let lastIndex = arr.length - 1;
-    console.log(arr[lastIndex], obj, arr.length);
-    return arr[lastIndex].destination !== obj.origin ? false : true;
-  };
-  const restTimeAndScheduleCollisionChecker = (
-    oldArrival,
-    newDeparture,
-    rotations
-  ) => {
-    if (rotations.length === 0) {
-      console.log("it's empty");
-      return true;
-    }
-    if (newDeparture - oldArrival < 20) {
-      return false;
-    }
-
-    return true;
-  };
-  //__________________Util Functions_____________//
   return (
     <div className="flight-container">
       I am flights
